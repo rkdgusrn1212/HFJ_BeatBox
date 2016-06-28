@@ -25,5 +25,12 @@ public class BeatBox {
 		BorderLayout layout = new BorderLayout();
 		JPanel background = new JPanel(layout);
 		background.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+		
+		checkboxList = new ArrayList<JCheckBox>();
+		Box buttonBox = new Box(BoxLayout.Y_AXIS);
+		
+		JButton start = new JButton("start");
+		start.addActionListener(new MyStartListener());
+		
 	}
 }
