@@ -5,7 +5,7 @@ import java.util.*;
 import java.awt.event.*;
 
 public class BeatBox {
-	JPanel mainpanel;
+	JPanel mainPanel;
 	ArrayList<JCheckBox> checkboxList;
 	Sequencer sequencer;
 	Sequence sequence;
@@ -45,7 +45,21 @@ public class BeatBox {
 		downTempo.addActionListener(new MyDownTempoListener());
 		buttonBox.add(downTempo);
 		
+		Box nameBox = new Box(BoxLayout.Y_AXIS);
+		for(int i =0 ; i<16;i++){
+			nameBox.add(new Label(instrumentNames[i]));
+		}
 		
+		background.add(BorderLayout.EAST,buttonBox);
+		background.add(BorderLayout.WEST.nameBox);
+		
+		theFrame.getContentPane().add(background); 
+		
+		GridLayout grid = new GridLayout(16,16);
+		grid.setVgap(1);
+		grid.setHgap(2);
+		mainPanel = new JPanel(grid);
+		background.add(BorderLayout.CENTER, mainPanel);
 		
 	}
 }
