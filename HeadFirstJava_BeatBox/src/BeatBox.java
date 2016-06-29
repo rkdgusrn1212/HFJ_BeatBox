@@ -61,5 +61,16 @@ public class BeatBox {
 		mainPanel = new JPanel(grid);
 		background.add(BorderLayout.CENTER, mainPanel);
 		
+		for(int i=0;i<265;i++){
+			JCheckBox c = new JCheckBox();
+			c.setSelected(false);
+			mainPanel.add(c);
+		}
+		setUpMidi();
+		
+		theFrame.setBounds(50,50,300,300);
+		theFrame.pack();
+		theFrame.setVisible(true);
 	}
+		
 }
