@@ -83,5 +83,30 @@ public class BeatBox {
 			
 		}catch(Exception e){e.printStackTrace();}
 	}
+	public void buildTrackAndStart(){
+		int[] trackList = null;
+		
+		sequence.deleteTrack(track);
+		track = sequence.createTrack();
+		
+		for(int i=0; i<16;i++){
+			trackList = new int[16];
+			
+			
+			int key = instruments[i];
+			
+			for(int j = 0; j<16;j++){
+				JCheckBox jc = checkboxList.get(j+16*i);
+				if(jc.isSelected()){
+					trackList[j] = key;
+				}else{
+					trackList[j] = 0;
+				}
+			}
+			
+			makeTracks(trackList);
+			track.add(makeEvent(176,1,127,0,16));
+		}
+	}
 
 }
