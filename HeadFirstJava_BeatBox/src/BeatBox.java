@@ -64,6 +64,7 @@ public class BeatBox {
 		for(int i=0;i<256;i++){
 			JCheckBox c = new JCheckBox();
 			c.setSelected(false);
+			checkboxList.add(c);
 			mainPanel.add(c);
 		}
 		setUpMidi();
