@@ -12,8 +12,8 @@ public class BeatBox {
 	Track track;
 	JFrame theFrame;
 	
-	String[] instrumentNames = {"Bass Drum","Closed Hi-Hat","Open Hi-Hat","Acoustic Snare","Crash Cymbal","Hand Clap","Hi Tom","Hi Bongo","Marakas","Whistle","Low Conga","Cowbell","Vibraslap","Low-mid Tom","High Agogo","Open Hi Conga"};
-	int[] instruments = {35,42,46,38,49,39,50,60,70,72,64,56,58,47,67,63};
+	String[] instrumentNames = {"Bass Drum", "Snare Drum", "Closed Hi-Hat","Open Hi-Hat","Acoustic Snare","Crash Cymbal","Hand Clap","Hi Tom","Hi Bongo","Marakas","Whistle","Low Conga","Cowbell","Vibraslap","Low-mid Tom","High Agogo","Open Hi Conga"};
+	int[] instruments = {36,38,42,46,38,49,39,50,60,70,72,64,56,58,47,67,63};
 	
 	public static void main(String[] args){
 		new BeatBox().buildGUI();
@@ -46,7 +46,7 @@ public class BeatBox {
 		buttonBox.add(downTempo);
 		
 		Box nameBox = new Box(BoxLayout.Y_AXIS);
-		for(int i =0 ; i<16;i++){
+		for(int i =0 ; i<17;i++){
 			nameBox.add(new Label(instrumentNames[i]));
 		}
 		
@@ -55,13 +55,13 @@ public class BeatBox {
 		
 		theFrame.getContentPane().add(background); 
 		
-		GridLayout grid = new GridLayout(16,16);
+		GridLayout grid = new GridLayout(17,16);
 		grid.setVgap(1);
 		grid.setHgap(2);
 		mainPanel = new JPanel(grid);
 		background.add(BorderLayout.CENTER, mainPanel);
 		
-		for(int i=0;i<256;i++){
+		for(int i=0;i<272;i++){
 			JCheckBox c = new JCheckBox();
 			c.setSelected(false);
 			checkboxList.add(c);
@@ -90,7 +90,7 @@ public class BeatBox {
 		sequence.deleteTrack(track);
 		track = sequence.createTrack();
 		
-		for(int i=0; i<16;i++){
+		for(int i=0; i<17;i++){
 			trackList = new int[16];
 			
 			
