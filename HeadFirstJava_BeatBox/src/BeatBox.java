@@ -46,6 +46,14 @@ public class BeatBox {
 		downTempo.addActionListener(new MyDownTempoListener());
 		buttonBox.add(downTempo);
 		
+		JButton serializeIt = new JButton("SerializeIt");
+		serializeIt.addActionListener(new MySendListener());
+		buttonBox.add(serializeIt);
+		
+		JButton restore = new JButton("restore");
+		restore.addActionListener(new MyReadInListener());
+		buttonBox.add(restore);
+		
 		Box nameBox = new Box(BoxLayout.Y_AXIS);
 		for(int i =0 ; i<17;i++){
 			nameBox.add(new Label(instrumentNames[i]));
@@ -190,5 +198,27 @@ public class BeatBox {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public class MyReadInListener implements ActionListener{
+		public void actionPerformed(ActionEvent a){
+			boolean[] checkboxState = null;
+			try{
+				FileInputStream fileIn=new FileInputStream(new File("Checkbox.ser"));
+				ObjectInputStream is = new ObjectInputStream(fileIn);
+				checkboxState = (boolean[]) is.readObject();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			
+			for (int i = 0;i<272;i++){
+				JCheckBox check = (JCheckBox) checkboxList.get(i);
+				check.setSelected(checkboxState[i]);
+			}
+			
+			sequencer.stop();
+			buildTrackAndStart();
+		}
+		
 	}
 }
