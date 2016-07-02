@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.io.*;
 import javax.swing.*;
 import javax.sound.midi.*;
 import java.util.*;
@@ -171,5 +172,23 @@ public class BeatBox {
 		}
 		return event;
 		
+	}
+	
+	public class MySendListener implements ActionListener{
+		public void actionPerformed(ActionEvent a){
+			boolean[] checkboxState = new boolean[272];
+			for(int i =0;i<272;i++){
+				JCheckBox check = checkboxList.get(i);
+				checkboxState[i] = check.isSelected();
+			}
+			
+			try{
+				FileOutputStream fileStream = new FileOutputStream(new File("Checkbox.ser"));
+				ObjectOutputStream os = new ObjectOutputStream(fileStream);
+				os.writeObject(checkboxState);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
 	}
 }
