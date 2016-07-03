@@ -47,7 +47,7 @@ public class BeatBox {
 		buttonBox.add(downTempo);
 		
 		JButton serializeIt = new JButton("SerializeIt");
-		serializeIt.addActionListener(new MySendListener());
+		serializeIt.addActionListener(new serializeListener());
 		buttonBox.add(serializeIt);
 		
 		JButton restore = new JButton("restore");
@@ -182,21 +182,55 @@ public class BeatBox {
 		
 	}
 	
-	public class MySendListener implements ActionListener{
+	public class serializeListener implements ActionListener{
+		
+		JFrame frame;
+		JTextField nameField;
+		Label label;
+		JButton button;
+		
 		public void actionPerformed(ActionEvent a){
+			
 			boolean[] checkboxState = new boolean[272];
+			
+			
+			frame = new JFrame();
+			nameField = new JTextField(10);
+			label = new Label("저장할 이름을 쓰시오");
+			button = new JButton("저장");
+			button.addActionListener(new ActionListener(){
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+
+					
+					try{
+						FileOutputStream fileStream = new FileOutputStream(new File(nameField.getText()+".ser"));
+						ObjectOutputStream os = new ObjectOutputStream(fileStream);
+						os.writeObject(checkboxState);
+					}catch(Exception ex){
+						ex.printStackTrace();
+					}
+					
+				}
+				
+			});
+			
+			frame.setLayout(new FlowLayout());
+			frame.getContentPane().add(label);
+			frame.getContentPane().add(nameField);
+			frame.getContentPane().add(button);
+			
+			frame.setLocation(330,50);
+			frame.pack();
+			frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+			frame.setVisible(true);
+			
 			for(int i =0;i<272;i++){
 				JCheckBox check = checkboxList.get(i);
 				checkboxState[i] = check.isSelected();
 			}
 			
-			try{
-				FileOutputStream fileStream = new FileOutputStream(new File("Checkbox.ser"));
-				ObjectOutputStream os = new ObjectOutputStream(fileStream);
-				os.writeObject(checkboxState);
-			}catch(Exception e){
-				e.printStackTrace();
-			}
 		}
 	}
 	
