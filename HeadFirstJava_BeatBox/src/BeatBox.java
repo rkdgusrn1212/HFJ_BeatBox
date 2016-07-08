@@ -235,8 +235,33 @@ public class BeatBox {
 	}
 	
 	public class MyReadInListener implements ActionListener{
+		
+		JFrame frame;
+		JList list;
+		Label label;
+		JButton button;
+		
 		public void actionPerformed(ActionEvent a){
 			boolean[] checkboxState = null;
+			
+			frame = new JFrame();
+			String[] listData = {"First","Second","Third"};
+			list = new JList(listData);
+			label = new Label("불러오기할 파일을 고르시오.");
+			button = new JButton("button");
+			
+			list.setLayoutOrientation(list.VERTICAL_WRAP);
+			list.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+			list.setVisibleRowCount(3);
+			
+			frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+			frame.setLocation(330,50);
+			frame.setLayout(new FlowLayout());
+			frame.getContentPane().add(label);
+			frame.getContentPane().add(list);
+			frame.pack();
+			frame.setVisible(true);
+			
 			try{
 				FileInputStream fileIn=new FileInputStream(new File("Checkbox.ser"));
 				ObjectInputStream is = new ObjectInputStream(fileIn);
